@@ -11,10 +11,12 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\LoginForm;
+use common\models\User;
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
+use frontend\models\ProfileForm;
 
 /**
  * Site controller
@@ -75,7 +77,11 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $model =  ProfileForm::GetWithUser(Yii::$app->user->identity->id);
+
+        return $this->render('index', [
+            'model' => $model,
+        ]);
     }
  
     /**
@@ -141,10 +147,6 @@ class SiteController extends Controller
      *
      * @return mixed
      */
-    public function actionAbout()
-    {
-        return $this->render('about');
-    }
 
     /**
      * Signs user up.
@@ -163,6 +165,7 @@ class SiteController extends Controller
             'model' => $model,
         ]);
     }
+
 
     /**
      * Requests password reset.

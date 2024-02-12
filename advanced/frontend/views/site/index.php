@@ -6,7 +6,7 @@
 use yii\bootstrap4\Html;
 use yii\bootstrap4\ActiveForm;
 
-$this->title = 'My Yii Application';
+$this->title = 'Главная страница';
 ?>
 <div class="site-index">
 
@@ -15,22 +15,21 @@ $this->title = 'My Yii Application';
                 
     <?php } else { ?>
     
-    <?php var_dump($model); ?>
-        <p>Please fill out the following fields to login:</p>
+        <p>Заполните поля для обновления своих данных:</p>
 
         <div class="row">
             <div class="col-lg-5">
                 <?php $form = ActiveForm::begin(['id' => 'profile-form']); ?>
-                
-                    <?= $form->field($model, 'first_name')->textInput(['autofocus' => true]) ?>
+
+                    <?= $form->field($model, 'first_name')->textInput(['autofocus' => true])->label('Имя'); ?>
                     
-                    <?= $form->field($model, 'last_name')->textInput() ?>
+                    <?= $form->field($model, 'last_name')->textInput()->label('Фамилия'); ?>
 
-                    <?= $form->field($model, 'email')->textInput(['readonly'=> true]) ?>
+                    <?= $form->field($model, 'email')->textInput(['readonly'=> true])->label('Электронная почта'); ?>
 
-                    <?= $form->field($model, 'password')->passwordInput() ?>
+                    <?= $form->field($model, 'password')->passwordInput()->label('Пароль'); ?>
 
-                    <?= $form->field($model, 'passwordRepeat')->passwordInput() ?>
+                    <?= $form->field($model, 'passwordRepeat')->passwordInput()->label('Повторите пароль'); ?>
                     
                     <button class="btn btn-lg btn-primary" type="submit">Сохранить</button>
                 <?php ActiveForm::end(); ?>
@@ -48,7 +47,7 @@ $this->title = 'My Yii Application';
 		 'data-pjax'=> '0',
 	];
 
-    echo Html::a('<span class="glyphicon glyphicon-trash">Удалить аккаунт?</span>', ['site/delete'], $options); ?>
+    echo Html::a('<span class="glyphicon glyphicon-trash">Удалить аккаунт</span>', ['site/delete'], $options); ?>
     <?php } ?>
 
     </div>

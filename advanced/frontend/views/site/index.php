@@ -15,7 +15,7 @@ $this->title = 'My Yii Application';
                 
     <?php } else { ?>
     
-
+    <?php var_dump($model); ?>
         <p>Please fill out the following fields to login:</p>
 
         <div class="row">
@@ -32,11 +32,23 @@ $this->title = 'My Yii Application';
 
                     <?= $form->field($model, 'passwordRepeat')->passwordInput() ?>
                     
-                    <button class="btn btn-lg btn-primary" type="submit">OK</button>
+                    <button class="btn btn-lg btn-primary" type="submit">Сохранить</button>
                 <?php ActiveForm::end(); ?>
 
             </div>
         </div> 
+    <?php
+    $options = [
+		'title' => Yii::t('yii', 'Удалить'),											
+		//'target' => '_blank',
+		'alt' => 'Link to Super Website',
+		 'aria-label'=> 'Удалить' ,
+		 'data-confirm'=> 'Вы уверены, что хотите удалить аккаунт?' ,
+		 'data-method'=> 'post' ,
+		 'data-pjax'=> '0',
+	];
+
+    echo Html::a('<span class="glyphicon glyphicon-trash">Удалить аккаунт?</span>', ['site/delete'], $options); ?>
     <?php } ?>
 
     </div>

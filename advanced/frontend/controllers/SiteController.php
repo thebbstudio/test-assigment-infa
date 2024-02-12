@@ -77,11 +77,29 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+
         $model =  ProfileForm::GetWithUser(Yii::$app->user->identity->id);
+        
+
+        if(Yii::$app->request->isPost){
+            if ($model->load(Yii::$app->request->post()) && $model->edit()) {
+                Yii::$app->session->setFlash('success', 'Данные успешно обновленны!');
+                return $this->goHome();
+            }
+        }
+
 
         return $this->render('index', [
             'model' => $model,
         ]);
+    }
+
+    public function actionDelete(){
+        $user = User::findOne(Yii::$app->user->identity->id);
+        $user->delete();
+
+        return $this->goHome();
+
     }
  
     /**

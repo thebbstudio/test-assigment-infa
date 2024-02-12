@@ -52,10 +52,8 @@ class ProfileForm extends Model
 
             //['email', 'readonly'],
 
-            ['password', 'required'],
             ['password', 'string', 'min' => Yii::$app->params['user.passwordMinLength']],
 
-            ['passwordRepeat', 'required'],
             ['passwordRepeat', 'checkPasswords']
         ];
     }
@@ -81,14 +79,16 @@ class ProfileForm extends Model
     }
 
     public function edit(){
-        $_user->first_name = $this->first_name;
-        $_user->last_name = $this->last_name;
-        $_user->email = $this->email;
-        $_user->setPassword($this->password);
-        $_user->generateAuthKey();
-        $_user->generateEmailVerificationToken();
+        $user = $this->getUser(Yii::$app->user->identity->id);
 
-        return $_user->save();
+        $user->first_name = $this->first_name;
+        $user->last_name = $this->last_name;
+        $user->email = $this->email;
+        if($this->password != null)
+            $user->setPassword($this->password);
+        //$user->generateAuthKey();
+
+        return $user->save();
 
     }
         
